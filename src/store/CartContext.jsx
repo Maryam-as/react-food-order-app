@@ -20,7 +20,7 @@ function cartReducer(state, action) {
 }
 
 export function CartContextProvider({ children }) {
-  useReducer();
+  useReducer(cartReducer, { items: [] });
 
   return <CartContext.Provider>{children}</CartContext.Provider>;
 }
