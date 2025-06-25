@@ -1,3 +1,5 @@
+import { createPortal } from "react-dom";
+
 export default function Modal() {
-  return <dialog></dialog>;
+  return createPortal(<dialog></dialog>, document.getElementById("modal"));
 }
