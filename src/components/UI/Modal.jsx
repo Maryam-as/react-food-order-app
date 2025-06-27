@@ -8,6 +8,10 @@ export default function Modal({ children, open, className = "" }) {
     if (open) {
       dialogRef.current.showModal();
     }
+
+    // Clean-up function to ensure the dialog is properly closed
+    // when the component unmounts or before re-running the effect
+    return () => dialogRef.current.close();
   }, [open]);
 
   return createPortal(
