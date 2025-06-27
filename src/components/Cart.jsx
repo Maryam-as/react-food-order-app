@@ -5,6 +5,11 @@ import CartContext from "../store/CartContext.jsx";
 export default function Cart() {
   const cartCtx = useContext(CartContext);
 
+  const cartTotal = cartCtx.items.reduce(
+    (totalPrice, item) => totalPrice + item.price * item.quantity,
+    0
+  );
+
   return (
     <Modal className="cart">
       <h2>Your Cart</h2>
@@ -15,7 +20,7 @@ export default function Cart() {
           </li>
         ))}
       </ul>
-      <p className="cart-total"></p>
+      <p className="cart-total">{cartTotal}</p>
     </Modal>
   );
 }
