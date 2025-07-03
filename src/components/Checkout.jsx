@@ -15,6 +15,10 @@ export default function Checkout() {
     0
   );
 
+  function handleCloseCheckout() {
+    userProgressCtx.hideCheckout();
+  }
+
   return (
     <Modal open={userProgressCtx.progress === "checkout"}>
       <form>
@@ -29,7 +33,7 @@ export default function Checkout() {
         </div>
 
         <p className="modal-actions">
-          <Button type="button" textOnly>
+          <Button type="button" textOnly onClick={handleCloseCheckout}>
             Close
           </Button>
           <Button>Submit Order</Button>
