@@ -3,6 +3,7 @@ import Modal from "./UI/Modal.jsx";
 import CartContext from "../store/CartContext.jsx";
 import { currencyFormatter } from "../util/formatting.js";
 import Input from "./UI/Input.jsx";
+import Button from "./UI/Button.jsx";
 
 export default function Checkout() {
   const cartCtx = useContext(CartContext);
@@ -24,6 +25,13 @@ export default function Checkout() {
           <Input label="Postal Code" type="text" id="postal-code" />
           <Input label="City" type="text" id="city" />
         </div>
+
+        <p className="modal-actions">
+          <Button type="button" textOnly>
+            Close
+          </Button>
+          <Button>Submit Order</Button>
+        </p>
       </form>
     </Modal>
   );
