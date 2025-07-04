@@ -23,7 +23,7 @@ export default function useHttp(url, config, initialData) {
     async function sendRequest() {
       setIsLoading(true);
       try {
-        const resData = sendHttpRequest(url, config);
+        const resData = await sendHttpRequest(url, config);
         setData(resData);
       } catch (error) {
         setError(error.message || "Something went wrong!");
@@ -34,8 +34,9 @@ export default function useHttp(url, config, initialData) {
   );
 
   useEffect(() => {
-    // Only auto-send request if it's a GET request to prevent unintended side effects from non-idempotent methods
-    if (config && config.method === "GET") {
+    // Auto-send request only if it's a GET request or if no method is specified,
+    // to avoid triggering non-idempotent operations like POST or DELETE unintentionally.
+    if ((config && (config.method === "GET" || !config.method)) || !config) {
       sendRequest();
     }
   }, [sendRequest, config]);
