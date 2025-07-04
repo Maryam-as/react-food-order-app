@@ -34,8 +34,11 @@ export default function useHttp(url, config) {
   );
 
   useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
+    // Only auto-send request if it's a GET request to prevent unintended side effects from non-idempotent methods
+    if (config && config.method === "GET") {
+      sendRequest();
+    }
+  }, [sendRequest, config]);
 
   return {
     data,
