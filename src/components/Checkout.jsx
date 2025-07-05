@@ -6,6 +6,7 @@ import Input from "./UI/Input.jsx";
 import Button from "./UI/Button.jsx";
 import UserProgressContext from "../store/UserProgressContext.jsx";
 import useHttp from "../hooks/useHttp.js";
+import Error from "./Error.jsx";
 
 const requestConfig = {
   method: "POST",
@@ -73,6 +74,8 @@ export default function Checkout() {
           <Input label="Postal Code" type="text" id="postal-code" />
           <Input label="City" type="text" id="city" />
         </div>
+
+        {error && <Error title="Failed to submit order" message={error} />}
 
         <p className="modal-actions">{actions}</p>
       </form>
