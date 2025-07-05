@@ -16,10 +16,12 @@ export default function Checkout() {
   const cartCtx = useContext(CartContext);
   const userProgressCtx = useContext(UserProgressContext);
 
-  const { data, isLoading, error, sendRequest } = useHttp(
-    "http://localhost:3000/orders",
-    requestConfig
-  );
+  const {
+    data,
+    isLoading: isSending,
+    error,
+    sendRequest,
+  } = useHttp("http://localhost:3000/orders", requestConfig);
 
   const cartTotal = cartCtx.items.reduce(
     (totalPrice, item) => totalPrice + item.price * item.quantity,
@@ -43,6 +45,19 @@ export default function Checkout() {
     );
   }
 
+  let actions = (
+    <>
+      <Button type="button" textOnly onClick={handleCloseCheckout}>
+        Close
+      </Button>
+      <Button>Submit Order</Button>
+    </>
+  );
+
+  if (isSending) {
+    actions = <span>Sending order data...</span>;
+  }
+
   return (
     <Modal
       open={userProgressCtx.progress === "checkout"}
@@ -59,12 +74,7 @@ export default function Checkout() {
           <Input label="City" type="text" id="city" />
         </div>
 
-        <p className="modal-actions">
-          <Button type="button" textOnly onClick={handleCloseCheckout}>
-            Close
-          </Button>
-          <Button>Submit Order</Button>
-        </p>
+        <p className="modal-actions">{actions}</p>
       </form>
     </Modal>
   );
