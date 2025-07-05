@@ -11,7 +11,7 @@ export default function Meals() {
   } = useHttp("http://localhost:3000/meals", requestConfig, []);
 
   if (isLoading) {
-    return <p>Fetching meals...</p>;
+    return <p className="center">Fetching meals...</p>;
   }
 
   return (
